@@ -93,12 +93,18 @@
 	1、npm install webpack-merge --save-dev
 	2、创建 env/webpack.common.js、env/webpack.dev.js、env/webpack.prod.js
 	     设置 webpack.common.js=webpack.config.js
+	     	output: {
+    	            filename: 'index.js',
+    	            path: path.resolve(__dirname, '../dist')
+  	       	 }
+		 
 	     设置 webpack.dev.js
 		const merge = require('webpack-merge');
 		const common = require('./webpack.common.js');
 		const webpack = require('webpack');
 
 		module.exports = merge(common, {
+		    mode: 'development',
     		    plugins: [
        		        // 配置环境变量
         		        new webpack.DefinePlugin({
@@ -109,12 +115,14 @@
         		        })
     		    ]
 		});
+		
 	     设置 webpack.prod.js
 		const merge = require('webpack-merge');
 		const common = require('./webpack.common.js');
 		const webpack = require('webpack');
 
 		module.exports = merge(common, {
+		    mode: 'production',
     		    plugins: [
        		        // 配置环境变量
         		        new webpack.DefinePlugin({
@@ -125,6 +133,7 @@
         		        })
     		    ]
 		});
+		
 	3、修改 package.json
 	     "scripts": {
     	          "build": "webpack --config env/webpack.prod.js",

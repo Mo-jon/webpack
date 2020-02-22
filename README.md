@@ -4,6 +4,7 @@
 一、创建项目文件夹
 
 二、使用npm创建pakage.json
+
 	npm init -y   // 默认方式创建 
 
 三、创建文件  index.html、src/index.js
@@ -11,10 +12,12 @@
 四、调整 package.json 文件，"private": true，并移除 main 入口
 
 五、要在 index.js 中打包 lodash 依赖，需要在本地安装 library
+
 	npm install lodash --save
 	src/index.js 中添加 import _ from 'lodash';
 
 六、添加webpack、配置 webpack.config.js
+
 	1、npm install webpack webpack-cli --save-dev
 
 	2、创建 webpack.config.js，内容如下
@@ -33,6 +36,7 @@
 	注意：npx webpack --config webpack.config.js （打包命令）
 
 七、修改打包执行命令
+
 	1、在 pakage.json 中添加
 	     "scripts": {
     		"build": "webpack"
@@ -42,6 +46,7 @@
 --------------------------------------------------------------------------------------------------
 
 八、自动创建 index.html 文件
+
 	1、npm install  html-webpack-plugin  --save-dev
 
 	2、创建 src/assets/favicon.ico、src/assets/index.html
@@ -50,15 +55,16 @@
 	    const HtmlWebpackPlugin = require('html-webpack-plugin');
 	    plugins: [
       	        new HtmlWebpackPlugin({
-        	            title: '这是一个webpack学习文件',        //  标题
-           	            favicon: 'src/assets/favicon.ico',          //  图标
-                            filename: 'index.html',		         //  文件名
-            	            template: 'src/assets/index.html',       //  模板
+        	   title: '这是一个webpack学习文件',        //  标题
+           	   favicon: 'src/assets/favicon.ico',          //  图标
+                   filename: 'index.html',		         //  文件名
+            	   template: 'src/assets/index.html',       //  模板
       	        }),
     	    ],
 	注意：HtmlWebpackPlugin 自动创建全新的 /dist/index.html 文件，所有的 bundle 会自动添加到 html 中
 
 九、自动清理 /dist 文件夹（此处官方文档有坑，注意导入模式）
+
 	npm install clean-webpack-plugin --save-dev
 	修改 webpack.config.js 添加以下配置
 	    const {CleanWebpackPlugin} = require('clean-webpack-plugin'); 
@@ -68,6 +74,7 @@
 	注意：clean-webpack-plugin 自动清理 /dist 的旧文件
 
 十、添加热重载
+
 	1、npm install  webpack-dev-server --save-dev
 
 	2、修改 webpack.config.js 添加以下配置
@@ -90,6 +97,7 @@
 	执行命令 npm run start
 
 十一、配置运行环境、环境变量
+
 	1、npm install webpack-merge --save-dev
 	
 	2、创建 env/webpack.common.js、env/webpack.dev.js、env/webpack.prod.js
@@ -108,12 +116,12 @@
 		    mode: 'development',
     		    plugins: [
        		        // 配置环境变量
-        		        new webpack.DefinePlugin({
-            		            'process.env': {
-                		  'NODE_ENV': JSON.stringify('development'),
-                		  'APP_SERVE': JSON.stringify('localhost:8000'),
-           		             }
-        		        })
+        		new webpack.DefinePlugin({
+            		   'process.env': {
+                	    'NODE_ENV': JSON.stringify('development'),
+                	    'APP_SERVE': JSON.stringify('localhost:8000'),
+           		}
+        	      })
     		    ]
 		});
 		
@@ -126,12 +134,12 @@
 		    mode: 'production',
     		    plugins: [
        		        // 配置环境变量
-        		        new webpack.DefinePlugin({
-            		            'process.env': {
-                		  'NODE_ENV': JSON.stringify('production'),
-                		  'APP_SERVE': JSON.stringify('guiqiang.net'),
-           		             }
-        		        })
+        		new webpack.DefinePlugin({
+            		   'process.env': {
+                		'NODE_ENV': JSON.stringify('production'),
+                		'APP_SERVE': JSON.stringify('guiqiang.net'),
+           		    }
+        		})
     		    ]
 		});
 		
@@ -148,6 +156,7 @@
 	         (webpack.config.js不加载、可删除)
 
 十二、使用 source map，追踪源码文件
+
 	修改 env/webpack.dev.js 添加以下配置
 	    merge(common, {
 	        devtool: 'inline-source-map',
@@ -160,17 +169,18 @@
 ---------------------------------------------------------------------------------------------------
 
 十三、配置成vue项目
+
 	1、npm install vue --save
-	     npm install vue-loader --save-dev
-	     npm install vue-template-compiler --save-dev
+	   npm install vue-loader --save-dev
+	   npm install vue-template-compiler --save-dev
 
 	2、修改 webpack.config.js 添加以下配置
 	     const VueLoaderPlugin = require('vue-loader/lib/plugin');
 	     module: {
-        	         rules: [ {
-            	             test: /\.vue$/,
-            	             use: ['vue-loader']
-        	         }]
+        	rules: [ {
+            	  test: /\.vue$/,
+            	  use: ['vue-loader']
+        	}]
     	     }
 
 	3、修改 main.js
@@ -189,18 +199,19 @@
 	4、创建 App.vue
 
 十四、配置css加载
+
 	1、npm install style-loader --save-dev
-	     npm install css-loader --save-dev
+	   npm install css-loader --save-dev
 
 	2、修改 webpack.config.js 添加以下配置
 	     module: {
-        	         rules: [ {
-            	             test: /\.css$/,
-            	             use: [
-		'style-loader',
-		'css-loader'
-	             ]
-        	         }]
+        	rules: [ {
+            	   test: /\.css$/,
+            	   use: [
+		      'style-loader',
+		      'css-loader'
+	           ]
+        	}]
     	     }
 
 

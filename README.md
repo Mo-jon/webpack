@@ -7,16 +7,17 @@
 
 	npm init -y   // 默认方式创建 
 
-三、创建文件  index.html、src/index.js
+三、创建必要文件
 
-四、调整 package.json 文件，"private": true，并移除 main 入口
+	1、创建 src/index.js
 
-五、要在 index.js 中打包 lodash 依赖，需要在本地安装 library
+	2、要在 index.js 中打包 lodash 依赖，需要在本地安装 library
+	  npm install lodash --save
+	  src/index.js 中添加 import _ from 'lodash';
+	  
+	3、调整 package.json 文件，"private": true，并移除 main 入口
 
-	npm install lodash --save
-	src/index.js 中添加 import _ from 'lodash';
-
-六、添加webpack、配置 webpack.config.js
+四、添加webpack、配置 webpack.config.js
 
 	1、npm install webpack webpack-cli --save-dev
 
@@ -35,7 +36,7 @@
 
 	注意：npx webpack --config webpack.config.js （打包命令）
 
-七、修改打包执行命令
+五、修改打包执行命令
 
 	1、在 pakage.json 中添加
 	     "scripts": {
@@ -45,7 +46,7 @@
 
 --------------------------------------------------------------------------------------------------
 
-八、自动创建 index.html 文件
+六、自动创建 index.html 文件
 
 	1、npm install  html-webpack-plugin  --save-dev
 
@@ -63,7 +64,7 @@
     	    ],
 	注意：HtmlWebpackPlugin 自动创建全新的 /dist/index.html 文件，所有的 bundle 会自动添加到 html 中
 
-九、自动清理 /dist 文件夹（此处官方文档有坑，注意导入模式）
+七、自动清理 /dist 文件夹（此处官方文档有坑，注意导入模式）
 
 	npm install clean-webpack-plugin --save-dev
 	修改 webpack.config.js 添加以下配置
@@ -73,7 +74,7 @@
     	    ],
 	注意：clean-webpack-plugin 自动清理 /dist 的旧文件
 
-十、添加热重载
+八、添加热重载
 
 	1、npm install  webpack-dev-server --save-dev
 
@@ -96,7 +97,7 @@
 	    }
 	执行命令 npm run start
 
-十一、配置运行环境、环境变量
+九、配置运行环境、环境变量
 
 	1、npm install webpack-merge --save-dev
 	
@@ -155,7 +156,7 @@
 	          npm run start:prod      // 运行 prod 配置环境
 	         (webpack.config.js不加载、可删除)
 
-十二、使用 source map，追踪源码文件
+十、使用 source map，追踪源码文件
 
 	修改 env/webpack.dev.js 添加以下配置
 	    merge(common, {
@@ -168,7 +169,7 @@
 
 ---------------------------------------------------------------------------------------------------
 
-十三、配置成vue项目
+十一、配置成vue项目
 
 	1、npm install vue --save
 	   npm install vue-loader --save-dev
@@ -198,7 +199,7 @@
 
 	4、创建 App.vue
 
-十四、配置css加载
+十二、配置css加载
 
 	1、npm install style-loader --save-dev
 	   npm install css-loader --save-dev

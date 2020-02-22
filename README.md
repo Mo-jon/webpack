@@ -91,6 +91,7 @@
 
 十一、配置运行环境、环境变量
 	1、npm install webpack-merge --save-dev
+	
 	2、创建 env/webpack.common.js、env/webpack.dev.js、env/webpack.prod.js
 	     设置 webpack.common.js=webpack.config.js
 	     	output: {
